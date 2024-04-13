@@ -16,9 +16,24 @@ scale = Vector2(1.1157, -1.66667)
 shape = SubResource("RectangleShape2D_5xvg5")
 
 [node name="Player" parent="." instance=ExtResource("1_gxydf")]
-position = Vector2(243, 140)
+position = Vector2(791, 245)
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(427.5, 354)
 scale = Vector2(14.9141, 1)
+texture = ExtResource("2_lrlj5")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(964, -488.5)
+scale = Vector2(1, 18.1016)
+texture = ExtResource("2_lrlj5")
+
+[node name="Icon3" type="Sprite2D" parent="."]
+position = Vector2(988, -2029)
+scale = Vector2(1, 18.1016)
+texture = ExtResource("2_lrlj5")
+
+[node name="Icon4" type="Sprite2D" parent="."]
+position = Vector2(976, -3300)
+scale = Vector2(1, 18.1016)
 texture = ExtResource("2_lrlj5")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://btsi2e0p4y0ne"]
+[gd_scene load_steps=33 format=3 uid="uid://btsi2e0p4y0ne"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_1qr5w"]
 [ext_resource type="Texture2D" uid="uid://by65sdm3pqeqh" path="res://Player/Mockup_Player/Run_Cycle_Mockup.png" id="1_6t7rj"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://Player/State_Machine/States/Idle_State.gd" id="3_22xgr"]
 [ext_resource type="Texture2D" uid="uid://cam4av7ur5sgu" path="res://Player/Mockup_Player/Climbing_Mockup.png" id="4_tsny8"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Run_State.gd" id="5_82k1j"]
+[ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State.gd" id="7_qt41j"]
+[ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State_Going_up.gd" id="8_f0qh4"]
+[ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State_Going_down.gd" id="10_cxntq"]
 
 [sub_resource type="Animation" id="Animation_57vjj"]
 length = 0.001
@@ -217,6 +220,81 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_6gjhn")
 blend_point_1/pos = 1.0
 blend_mode = 1
 
+[sub_resource type="Animation" id="Animation_7xk34"]
+resource_name = "Going_Up_Animation"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_7jvvs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c0hkr"]
+_data = {
+"Going_Up_Animation": SubResource("Animation_7xk34"),
+"RESET": SubResource("Animation_7jvvs")
+}
+
+[sub_resource type="Animation" id="Animation_v1isy"]
+resource_name = "Flying"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_tx0rv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ryekx"]
+_data = {
+"Flying": SubResource("Animation_v1isy"),
+"RESET": SubResource("Animation_tx0rv")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aelwd"]
 radius = 9.0
 height = 38.0
@@ -230,14 +308,16 @@ camera = NodePath("CharacterBody2D/Camera2D")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(0, -16)
 
-[node name="State_Machine" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("idle_state", "run_state", "player_body", "camera")]
+[node name="State_Machine" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("idle_state", "run_state", "flying_state", "player_body", "camera")]
 script = ExtResource("1_jrvsx")
 idle_state = NodePath("Idle_State")
 run_state = NodePath("Run_State")
+flying_state = NodePath("Flying_State")
 player_body = NodePath("..")
 camera = NodePath("../Camera2D")
 
 [node name="Idle_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("player_body")]
+visible = false
 script = ExtResource("3_22xgr")
 player_body = NodePath("../..")
 
@@ -261,6 +341,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = 0
 
 [node name="Run_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("player_body")]
+visible = false
 script = ExtResource("5_82k1j")
 player_body = NodePath("../..")
 
@@ -282,27 +363,38 @@ visible = false
 texture = ExtResource("1_6t7rj")
 hframes = 10
 
-[node name="Flying_State" type="Node2D" parent="CharacterBody2D/State_Machine"]
+[node name="Flying_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("going_up", "max_reach", "player_body")]
+script = ExtResource("7_qt41j")
+going_up = NodePath("Going_Up")
+max_reach = NodePath("Max_Reach")
+player_body = NodePath("../..")
 
 [node name="Going_Up" type="Node2D" parent="CharacterBody2D/State_Machine/Flying_State"]
+script = ExtResource("8_f0qh4")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Flying_State/Going_Up"]
-visible = false
 position = Vector2(1, 0)
 texture = ExtResource("3_3amtp")
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Flying_State/Going_Up"]
+libraries = {
+"": SubResource("AnimationLibrary_c0hkr")
+}
 
-[node name="Going_Down" type="Node2D" parent="CharacterBody2D/State_Machine/Flying_State"]
+[node name="Max_Reach" type="Node2D" parent="CharacterBody2D/State_Machine/Flying_State"]
+script = ExtResource("10_cxntq")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Flying_State/Going_Down"]
-visible = false
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Flying_State/Max_Reach"]
 position = Vector2(1, 0)
 texture = ExtResource("3_3amtp")
 hframes = 4
+frame = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Flying_State/Going_Down"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Flying_State/Max_Reach"]
+libraries = {
+"": SubResource("AnimationLibrary_ryekx")
+}
 
 [node name="Climbing_State" type="Node2D" parent="CharacterBody2D/State_Machine"]
 
@@ -329,8 +421,11 @@ hframes = 6
 [node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D/State_Machine/Climbing_State/Climbing"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_aelwd")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(1, -72)
+
+[connection signal="animation_finished" from="CharacterBody2D/State_Machine/Flying_State/Going_Up/AnimationPlayer" to="CharacterBody2D/State_Machine/Flying_State" method="_on_animation_player_animation_finished"]

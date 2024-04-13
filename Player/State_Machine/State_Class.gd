@@ -37,10 +37,10 @@ func exit():
 	pass
 	
 func complete():
-	pass
+	is_complete = true
 	
 func elapsed_time():
-	return time - Time.get_ticks_msec()
+	return (Time.get_ticks_msec() - time)/1000
 	
 func change_movement():
 	can_move = !can_move
