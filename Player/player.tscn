@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://btsi2e0p4y0ne"]
+[gd_scene load_steps=37 format=3 uid="uid://btsi2e0p4y0ne"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_1qr5w"]
 [ext_resource type="Texture2D" uid="uid://by65sdm3pqeqh" path="res://Player/Mockup_Player/Run_Cycle_Mockup.png" id="1_6t7rj"]
@@ -6,11 +6,12 @@
 [ext_resource type="Script" path="res://Player/State_Machine/State_Machine.gd" id="1_jrvsx"]
 [ext_resource type="Texture2D" uid="uid://8j1rvp67og5p" path="res://Player/Mockup_Player/Flying_Mockup.png" id="3_3amtp"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Idle_State.gd" id="3_22xgr"]
-[ext_resource type="Texture2D" uid="uid://cam4av7ur5sgu" path="res://Player/Mockup_Player/Climbing_Mockup.png" id="4_tsny8"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Run_State.gd" id="5_82k1j"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State.gd" id="7_qt41j"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State_Going_up.gd" id="8_f0qh4"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State_Going_down.gd" id="10_cxntq"]
+[ext_resource type="Texture2D" uid="uid://x3i4te2xohib" path="res://Player/Mockup_Player/Climbing_2_Mockup.png" id="11_nmga6"]
+[ext_resource type="Script" path="res://Player/State_Machine/States/Climbing_State.gd" id="11_rs4fh"]
 
 [sub_resource type="Animation" id="Animation_57vjj"]
 length = 0.001
@@ -295,6 +296,44 @@ _data = {
 "RESET": SubResource("Animation_tx0rv")
 }
 
+[sub_resource type="Animation" id="Animation_3wr0p"]
+resource_name = "climbing"
+length = 0.6
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_sywn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2y7f"]
+_data = {
+"RESET": SubResource("Animation_sywn4"),
+"climbing": SubResource("Animation_3wr0p")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aelwd"]
 radius = 9.0
 height = 38.0
@@ -308,11 +347,12 @@ camera = NodePath("CharacterBody2D/Camera2D")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(0, -16)
 
-[node name="State_Machine" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("idle_state", "run_state", "flying_state", "player_body", "camera")]
+[node name="State_Machine" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("idle_state", "run_state", "flying_state", "climbing_state", "player_body", "camera")]
 script = ExtResource("1_jrvsx")
 idle_state = NodePath("Idle_State")
 run_state = NodePath("Run_State")
 flying_state = NodePath("Flying_State")
+climbing_state = NodePath("Climbing_State")
 player_body = NodePath("..")
 camera = NodePath("../Camera2D")
 
@@ -364,6 +404,7 @@ texture = ExtResource("1_6t7rj")
 hframes = 10
 
 [node name="Flying_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("going_up", "max_reach", "player_body")]
+visible = false
 script = ExtResource("7_qt41j")
 going_up = NodePath("Going_Up")
 max_reach = NodePath("Max_Reach")
@@ -396,29 +437,18 @@ libraries = {
 "": SubResource("AnimationLibrary_ryekx")
 }
 
-[node name="Climbing_State" type="Node2D" parent="CharacterBody2D/State_Machine"]
+[node name="Climbing_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("player_body")]
+script = ExtResource("11_rs4fh")
+player_body = NodePath("../..")
 
-[node name="Start_Climbing" type="Node2D" parent="CharacterBody2D/State_Machine/Climbing_State"]
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Climbing_State"]
+texture = ExtResource("11_nmga6")
+hframes = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Climbing_State/Start_Climbing"]
-visible = false
-texture = ExtResource("4_tsny8")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Climbing_State/Start_Climbing"]
-
-[node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D/State_Machine/Climbing_State/Start_Climbing"]
-
-[node name="Climbing" type="Node2D" parent="CharacterBody2D/State_Machine/Climbing_State"]
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Climbing_State/Climbing"]
-visible = false
-texture = ExtResource("4_tsny8")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Climbing_State/Climbing"]
-
-[node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D/State_Machine/Climbing_State/Climbing"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Climbing_State"]
+libraries = {
+"": SubResource("AnimationLibrary_s2y7f")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 visible = false

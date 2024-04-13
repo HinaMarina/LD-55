@@ -39,6 +39,8 @@ func _process(delta):
 	else:
 		gliding = is_on_floor
 		
+	if current_state == climbing_state:
+		climbing = !climbing_state.is_complete
 
 	for state in states_array:
 		state.is_on_floor = is_on_floor
@@ -52,27 +54,30 @@ func _process(delta):
 	#Setting State responding through the input#
 	if is_on_floor:
 		if can_move:
-			if abs(Input.get_axis("ui_left","ui_right"))>0 && identify_directional_input() && !flying:
-				input_vector.x = Input.get_axis("ui_left","ui_right")
-				input_vector.y = 0.0
-				set_state(run_state)
-				update_states_variables()
-				update_states_animator_tree()
-				update_sprites_visibility()
-
-			elif !flying:
-				player_body.velocity = player_body.velocity.move_toward(Vector2.ZERO,120)
-				player_body.move_and_slide()
-				if player_body.velocity == Vector2.ZERO:
-					set_state(idle_state)
-					update_sprites_visibility()
+			if !climbing:
+				if abs(Input.get_axis("ui_left","ui_right"))>0 && identify_directional_input() && !flying:
+					input_vector.x = Input.get_axis("ui_left","ui_right")
+					input_vector.y = 0.0
+					set_state(run_state)
 					update_states_variables()
-					if Input.is_action_just_pressed("ui_accept"):
-						set_state(flying_state)
-						flying = true
+					update_states_animator_tree()
+					update_sprites_visibility()
+
+				elif !flying:
+					player_body.velocity = player_body.velocity.move_toward(Vector2.ZERO,120)
+					player_body.move_and_slide()
+					if player_body.velocity == Vector2.ZERO:
+						set_state(idle_state)
 						update_sprites_visibility()
+						update_states_variables()
+						if Input.is_action_just_pressed("ui_accept"):
+							set_state(flying_state)
+							flying = true
+							update_sprites_visibility()
 		
-				
+			if Input.is_action_just_pressed("climb"):
+				set_state(climbing_state)
+				update_sprites_visibility()
 		
 func _physics_process(delta):
 	########### physics_do the current state
@@ -82,7 +87,7 @@ func _physics_process(delta):
 			update_states_animator_tree()
 			
 	########### apply_gravity ##########
-	if !is_on_floor && !flying:
+	if !is_on_floor && !flying && !climbing:
 		if current_state == run_state:
 			player_body.velocity = player_body.velocity.move_toward(Vector2.ZERO,120)
 			player_body.move_and_slide()
