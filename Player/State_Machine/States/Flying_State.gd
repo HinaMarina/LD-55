@@ -2,9 +2,9 @@ extends State
 
 @export var going_up :State
 @export var max_reach :State
-@export var vertical_speed = -700
-@export var vertical_accel = 250
-@export var flying_time:float = 3.2
+@export var vertical_speed = -400
+@export var vertical_accel = 100
+@export var flying_time:float = 2
 
 var running_state:State
 var substates_array : Array [State] = []
@@ -37,7 +37,7 @@ func update_running_state_assets():
 func push_up():
 	if elapsed_time() < flying_time:
 		player_body.velocity.x = Input.get_axis("ui_left","ui_right")*100
-		player_body.velocity.y = move_toward(0,vertical_speed,vertical_accel)
+		player_body.velocity.y = vertical_speed
 		player_body.move_and_slide()
 	if elapsed_time() > flying_time:
 		player_body.velocity.x = Input.get_axis("ui_left","ui_right")*100
@@ -46,7 +46,6 @@ func push_up():
 		if player_body.velocity.y == 0:
 			complete()
 			exit()
-	print(player_body.velocity.y)
 	
 func do():
 	super()

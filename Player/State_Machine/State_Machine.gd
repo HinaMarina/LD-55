@@ -19,6 +19,7 @@ var flying : bool = false
 var can_move : bool = true
 var climbing : bool = false
 var state_wanna_exit : bool
+var gliding:bool
 
 @export var gravity = 5
 
@@ -30,9 +31,15 @@ func _ready():
 			child.visible = true
 			
 func _process(delta):
-	if current_state == flying_state:
-		flying = !flying_state.is_complete
 	is_on_floor = player_body.is_on_floor()
+	
+	if current_state == flying_state:
+		gliding = flying_state.is_complete
+		flying = !flying_state.is_complete
+	else:
+		gliding = is_on_floor
+		
+
 	for state in states_array:
 		state.is_on_floor = is_on_floor
 	########### do the current state
@@ -45,7 +52,7 @@ func _process(delta):
 	#Setting State responding through the input#
 	if is_on_floor:
 		if can_move:
-			if abs(Input.get_axis("ui_left","ui_right"))>0 && identify_directional_input():
+			if abs(Input.get_axis("ui_left","ui_right"))>0 && identify_directional_input() && !flying:
 				input_vector.x = Input.get_axis("ui_left","ui_right")
 				input_vector.y = 0.0
 				set_state(run_state)
@@ -60,11 +67,11 @@ func _process(delta):
 					set_state(idle_state)
 					update_sprites_visibility()
 					update_states_variables()
-					
-		if Input.is_action_just_pressed("ui_accept"):
-			set_state(flying_state)
-			flying = true
-			update_sprites_visibility()
+					if Input.is_action_just_pressed("ui_accept"):
+						set_state(flying_state)
+						flying = true
+						update_sprites_visibility()
+		
 				
 		
 func _physics_process(delta):
@@ -76,8 +83,22 @@ func _physics_process(delta):
 			
 	########### apply_gravity ##########
 	if !is_on_floor && !flying:
-		player_body.velocity.y += gravity
-		player_body.move_and_slide()
+		if current_state == run_state:
+			player_body.velocity = player_body.velocity.move_toward(Vector2.ZERO,120)
+			player_body.move_and_slide()
+			if player_body.velocity == Vector2.ZERO:
+				set_state(idle_state)
+				update_sprites_visibility()
+		if !gliding:
+			player_body.velocity.x = Input.get_axis("ui_left","ui_right")*run_state.max_speed
+			player_body.velocity.y += gravity*2
+			player_body.move_and_slide()
+			set_state(idle_state)
+			update_sprites_visibility()
+		if gliding:
+			player_body.velocity.x = Input.get_axis("ui_left","ui_right")*run_state.max_speed
+			player_body.velocity.y += gravity*0.35
+			player_body.move_and_slide()
 	
 func update_sprites_visibility():
 	for state in states_array:
