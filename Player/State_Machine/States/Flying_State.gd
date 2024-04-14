@@ -36,11 +36,11 @@ func update_running_state_assets():
 			
 func push_up():
 	if elapsed_time() < flying_time:
-		player_body.velocity.x = Input.get_axis("ui_left","ui_right")*100
+		player_body.velocity.x = Input.get_axis("ui_left","ui_right")*30
 		player_body.velocity.y = vertical_speed
 		player_body.move_and_slide()
 	if elapsed_time() > flying_time:
-		player_body.velocity.x = Input.get_axis("ui_left","ui_right")*100
+		player_body.velocity.x = Input.get_axis("ui_left","ui_right")*30
 		player_body.velocity.y = move_toward(player_body.velocity.y,0,vertical_accel)
 		player_body.move_and_slide()
 		if player_body.velocity.y == 0:
