@@ -1,6 +1,5 @@
-[gd_scene load_steps=11 format=3 uid="uid://di6valc4ki7v2"]
+[gd_scene load_steps=10 format=3 uid="uid://di6valc4ki7v2"]
 
-[ext_resource type="Texture2D" uid="uid://bfgrdqwf7ov7w" path="res://World/parallax_forest_test/8.png" id="1_d40t5"]
 [ext_resource type="Texture2D" uid="uid://xhtwosbd1mi4" path="res://World/parallax_forest_test/7.png" id="2_suqkg"]
 [ext_resource type="Texture2D" uid="uid://qjygnki02bdw" path="res://World/parallax_forest_test/6.png" id="3_jfekb"]
 [ext_resource type="Texture2D" uid="uid://yvb37uis5kuf" path="res://World/parallax_forest_test/5.png" id="4_qdbwy"]
@@ -24,48 +23,41 @@ motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(1060, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
-texture = ExtResource("1_d40t5")
+texture = ExtResource("9_xtj4l")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_scale = Vector2(0.3, 1)
 motion_mirroring = Vector2(1060, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource("2_suqkg")
+texture = ExtResource("7_jnw1g")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_scale = Vector2(0.5, 1)
 motion_mirroring = Vector2(1060, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer3"]
-texture = ExtResource("3_jfekb")
+texture = ExtResource("6_wbydw")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_scale = Vector2(0.7, 1)
 motion_mirroring = Vector2(1060, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer4"]
-texture = ExtResource("4_qdbwy")
+texture = ExtResource("5_x5hg1")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_scale = Vector2(0.8, 1)
 motion_mirroring = Vector2(1060, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer5"]
-texture = ExtResource("5_x5hg1")
-
-[node name="ParallaxLayer6" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
-visible = false
-motion_mirroring = Vector2(1060, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer6"]
-texture = ExtResource("6_wbydw")
+texture = ExtResource("4_qdbwy")
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
 motion_mirroring = Vector2(1060, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer7"]
-texture = ExtResource("7_jnw1g")
+texture = ExtResource("3_jfekb")
 
 [node name="Player" parent="CanvasLayer/ParallaxBackground" instance=ExtResource("8_cb50b")]
 position = Vector2(239, 227)
@@ -75,7 +67,7 @@ motion_scale = Vector2(1.2, 1)
 motion_mirroring = Vector2(1060, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer8"]
-texture = ExtResource("9_xtj4l")
+texture = ExtResource("2_suqkg")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 9)
