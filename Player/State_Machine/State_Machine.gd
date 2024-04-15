@@ -32,7 +32,7 @@ func _ready():
 			
 func _process(delta):
 	is_on_floor = player_body.is_on_floor()
-	
+	can_move = PauseTree.can_move
 	if current_state == flying_state:
 		gliding = flying_state.is_complete
 		flying = !flying_state.is_complete
@@ -70,7 +70,7 @@ func _process(delta):
 						set_state(idle_state)
 						update_sprites_visibility()
 						update_states_variables()
-						if Input.is_action_just_pressed("ui_accept"):
+						if Input.is_action_just_pressed("ui_accept") && GlobalVariables.flower_number>=1:
 							set_state(flying_state)
 							flying = true
 							update_sprites_visibility()
@@ -102,7 +102,7 @@ func _physics_process(delta):
 			update_sprites_visibility()
 		if gliding:
 			player_body.velocity.x = Input.get_axis("ui_left","ui_right")*run_state.max_speed
-			player_body.velocity.y += gravity*0.35
+			player_body.velocity.y += gravity*0.1
 			player_body.move_and_slide()
 	
 func update_sprites_visibility():
@@ -110,8 +110,15 @@ func update_sprites_visibility():
 		if state.sprite != null:
 			if state != current_state:
 				state.sprite.visible = false
+				if state.audio_player != null:
+					state.audio_player.volume_db = -100
+				if state.animator_tree != null:
+					state.animator_tree.active = false
 			else:
 				state.sprite.visible = true
+				if state.audio_player != null:
+					state.audio_player.volume_db = 0
+					state.animator_tree.active = true
 
 func set_state(new_state:State):
 	if new_state != null && new_state != current_state:

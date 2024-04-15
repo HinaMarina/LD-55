@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=7 format=3 uid="uid://dkv1pl1c1dq6"]
+
+[ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://UI/Dialogic_theme/VisualNovelTextbox/custom_vn_textbox_layer.tscn" id="1_3xsbq"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="1_rq7ei"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_p8dyq"]
+[ext_resource type="PackedScene" uid="uid://bgnrhlrc6q44k" path="res://UI/Dialogic_theme/VisualNovelTextbox/CenteredChoices/custom_vn_choice_layer.tscn" id="3_8y5my"]
+
+[sub_resource type="Resource" id="Resource_m7kqg"]
+script = ExtResource("2_p8dyq")
+scene = ExtResource("1_3xsbq")
+overrides = {
+"autoadvance_progressbar": "false",
+"box_margin_bottom": "150.0",
+"box_panel": "\"res://UI/Dialogic_theme/Default_Style.tres\"",
+"box_size": "Vector2(100, 100)",
+"name_label_box_modulate": "Color(0.647059, 0.490196, 0.858824, 1)",
+"name_label_box_offset": "Vector2(0, 11)",
+"name_label_box_panel": "\"res://UI/Dialogic_theme/panel_texture.tres\"",
+"name_label_custom_font_size": "12.0",
+"next_indicator_enabled": "false",
+"next_indicator_show_on_questions": "false",
+"next_indicator_size": "Vector2(40, 120)",
+"text_alignment": "1",
+"text_custom_color": "Color(0, 0, 0, 1)",
+"text_size": "12.0"
+}
+
+[sub_resource type="Resource" id="Resource_j6ehp"]
+script = ExtResource("2_p8dyq")
+scene = ExtResource("3_8y5my")
+overrides = {
+"boxes_fill_width": "false",
+"boxes_min_size": "Vector2(60, 0)",
+"boxes_v_separation": "2.0",
+"font_custom": "\"res://UI/Typefaces/nokiafc22.ttf\"",
+"font_size_custom": "12.0",
+"text_color_custom": "Color(0.94902, 0.941176, 0.898039, 1)",
+"text_color_disabled": "Color(0.94902, 0.941176, 0.898039, 1)",
+"text_color_focused": "Color(0.94902, 0.941176, 0.898039, 1)",
+"text_color_hovered": "Color(0.94902, 0.941176, 0.898039, 1)",
+"text_color_pressed": "Color(0.94902, 0.941176, 0.898039, 1)"
+}
+
+[resource]
+script = ExtResource("1_rq7ei")
+name = "vn_textbox_default_panel"
+base_overrides = {
+"global_bg_color": "Color(0.635294, 0.466667, 0.717647, 0.901961)",
+"global_font": "\"res://UI/Typefaces/nokiafc22.ttf\"",
+"global_font_color": "Color(0.94902, 0.941176, 0.898039, 1)",
+"global_font_size": "10.0"
+}
+layers = Array[ExtResource("2_p8dyq")]([SubResource("Resource_m7kqg"), SubResource("Resource_j6ehp")])
+metadata/_latest_layer = 0

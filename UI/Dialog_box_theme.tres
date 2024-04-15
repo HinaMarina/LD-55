@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=5 format=3 uid="uid://db3ho3ii7ue4"]
+
+[ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="1_3tkvr"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="1_nrfld"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_p506h"]
+
+[sub_resource type="Resource" id="Resource_3kjf8"]
+script = ExtResource("2_p506h")
+scene = ExtResource("1_3tkvr")
+overrides = {
+"box_color_custom": "Color(1, 0.886275, 0.886275, 1)",
+"box_color_use_global": "false",
+"box_margin_bottom": "150.0",
+"box_panel": "\"res://UI/Dialogic_theme/Default_Style.tres\"",
+"box_size": "Vector2(151, 91)",
+"name_label_box_modulate": "Color(0.8, 0.705882, 0.745098, 1)",
+"name_label_box_offset": "Vector2(0, 10)",
+"name_label_box_panel": "\"res://UI/Dialogic_theme/Default_Style.tres\"",
+"name_label_box_use_global_color": "false",
+"name_label_custom_color": "Color(0.643137, 0.623529, 0.623529, 1)",
+"name_label_font": "\"res://UI/Typefaces/cambriab.ttf\"",
+"name_label_use_character_color": "false",
+"name_label_use_global_color": "false"
+}
+
+[resource]
+script = ExtResource("1_nrfld")
+name = "Dialog_box_theme"
+base_overrides = {
+"global_bg_color": "Color(0, 0, 0, 0.901961)",
+"global_font": "\"res://UI/Typefaces/cambriab.ttf\"",
+"global_font_size": "12.0"
+}
+layers = Array[ExtResource("2_p506h")]([SubResource("Resource_3kjf8")])
+metadata/_latest_layer = 0

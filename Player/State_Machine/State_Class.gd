@@ -5,6 +5,7 @@ class_name State extends Node2D
 @onready var sprite:Sprite2D
 @onready var animator:AnimationPlayer
 @onready var animator_tree:AnimationTree
+@export var audio_player : AudioStreamPlayer2D
 
 ############## State Data ######################
 @onready var input_vector:Vector2

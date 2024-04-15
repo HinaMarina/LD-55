@@ -1,17 +1,22 @@
-[gd_scene load_steps=37 format=3 uid="uid://btsi2e0p4y0ne"]
+[gd_scene load_steps=42 format=3 uid="uid://btsi2e0p4y0ne"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_1qr5w"]
-[ext_resource type="Texture2D" uid="uid://by65sdm3pqeqh" path="res://Player/Mockup_Player/Run_Cycle_Mockup.png" id="1_6t7rj"]
-[ext_resource type="Texture2D" uid="uid://cppow5xh2gk8y" path="res://Player/Mockup_Player/Idle_Mockup.png" id="1_ami3y"]
 [ext_resource type="Script" path="res://Player/State_Machine/State_Machine.gd" id="1_jrvsx"]
-[ext_resource type="Texture2D" uid="uid://8j1rvp67og5p" path="res://Player/Mockup_Player/Flying_Mockup.png" id="3_3amtp"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Idle_State.gd" id="3_22xgr"]
+[ext_resource type="Texture2D" uid="uid://cf2kl4hon3rg1" path="res://Player/Sheets/Idle_final_sheet.png" id="4_hj63v"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Run_State.gd" id="5_82k1j"]
+[ext_resource type="Texture2D" uid="uid://ifeihevl2tk4" path="res://Player/Sheets/run_cycle_final-Sheet.png" id="6_y6l0x"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State.gd" id="7_qt41j"]
+[ext_resource type="AudioStream" uid="uid://b4sw7yhdogkbd" path="res://Sound/FX/step1.ogg" id="7_x10ro"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State_Going_up.gd" id="8_f0qh4"]
+[ext_resource type="Texture2D" uid="uid://xgcd848kdx4u" path="res://Player/Sheets/going_up_final_sheet.png" id="9_wm0tk"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Flying_State_Going_down.gd" id="10_cxntq"]
-[ext_resource type="Texture2D" uid="uid://x3i4te2xohib" path="res://Player/Mockup_Player/Climbing_2_Mockup.png" id="11_nmga6"]
 [ext_resource type="Script" path="res://Player/State_Machine/States/Climbing_State.gd" id="11_rs4fh"]
+[ext_resource type="Texture2D" uid="uid://c00jtnxvfbw52" path="res://Player/Sheets/Flying_final_sheet.png" id="11_upu4v"]
+[ext_resource type="Texture2D" uid="uid://btnqmg1unmx4r" path="res://Player/Sheets/climbin_final_sheet.png" id="13_2cco0"]
+[ext_resource type="Texture2D" uid="uid://dlsvk0j21b73k" path="res://UI/Icons/Bag_UI_Icon.png" id="14_7nv3h"]
+[ext_resource type="Texture2D" uid="uid://d2ftt6cwliytb" path="res://UI/Icons/Inventory.png" id="15_qktdv"]
+[ext_resource type="FontFile" uid="uid://iaxbdcmnag7i" path="res://UI/Typefaces/nokiafc22.ttf" id="16_qk2jw"]
 
 [sub_resource type="Animation" id="Animation_57vjj"]
 length = 0.001
@@ -42,7 +47,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_vnfex"]
 resource_name = "idle_animation_left"
-length = 1.2
+length = 2.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -51,10 +56,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -71,7 +76,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_fi7k0"]
 resource_name = "idle_animation_right"
-length = 1.2
+length = 2.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -80,10 +85,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -144,10 +149,23 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Step_sound_player:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_pmy6y"]
 resource_name = "run_animation_left"
 loop_mode = 1
+step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -172,10 +190,23 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Step_sound_player:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.26, 0.76),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
 
 [sub_resource type="Animation" id="Animation_un7ky"]
 resource_name = "run_animation_right"
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -199,6 +230,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Step_sound_player:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y2c0y"]
@@ -260,7 +303,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_v1isy"]
 resource_name = "Flying"
-length = 0.1
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -269,10 +312,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [3]
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_tx0rv"]
@@ -296,6 +339,21 @@ _data = {
 "RESET": SubResource("Animation_tx0rv")
 }
 
+[sub_resource type="Animation" id="Animation_sywn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_3wr0p"]
 resource_name = "climbing"
 length = 0.6
@@ -313,21 +371,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_sywn4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s2y7f"]
 _data = {
 "RESET": SubResource("Animation_sywn4"),
@@ -338,11 +381,17 @@ _data = {
 radius = 9.0
 height = 38.0
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("player_body", "state_machine", "camera")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("player_body", "state_machine", "camera", "canvas_layer", "bag_icon", "inventory_panel", "inventory_bg", "seed_number_label", "flower_number_label")]
 script = ExtResource("1_1qr5w")
 player_body = NodePath("CharacterBody2D")
 state_machine = NodePath("CharacterBody2D/State_Machine")
 camera = NodePath("CharacterBody2D/Camera2D")
+canvas_layer = NodePath("CanvasLayer")
+bag_icon = NodePath("CanvasLayer/Bag_icon")
+inventory_panel = NodePath("CanvasLayer/Inventory")
+inventory_bg = NodePath("CanvasLayer/Inventory_bg")
+seed_number_label = NodePath("CanvasLayer/Inventory/Seed_number")
+flower_number_label = NodePath("CanvasLayer/Inventory/Flower_number")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(0, -16)
@@ -363,9 +412,9 @@ player_body = NodePath("../..")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Idle_State"]
 position = Vector2(0, -4)
-texture = ExtResource("1_ami3y")
+texture = ExtResource("4_hj63v")
 flip_h = true
-hframes = 12
+hframes = 24
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Idle_State"]
 libraries = {
@@ -380,14 +429,15 @@ tree_root = SubResource("AnimationNodeBlendSpace1D_i5rxw")
 anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = 0
 
-[node name="Run_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("player_body")]
-visible = false
+[node name="Run_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("player_body", "audio_player")]
 script = ExtResource("5_82k1j")
 max_speed = 40
 acceleration = 60
 player_body = NodePath("../..")
+audio_player = NodePath("Step_sound_player")
 
 [node name="AnimationTree" type="AnimationTree" parent="CharacterBody2D/State_Machine/Run_State"]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_y2c0y")
 }
@@ -401,16 +451,17 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Run_State"]
-visible = false
-texture = ExtResource("1_6t7rj")
+position = Vector2(-2, -3)
+texture = ExtResource("6_y6l0x")
 hframes = 10
 
+[node name="Step_sound_player" type="AudioStreamPlayer2D" parent="CharacterBody2D/State_Machine/Run_State"]
+stream = ExtResource("7_x10ro")
+
 [node name="Flying_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("going_up", "max_reach", "player_body")]
-visible = false
 script = ExtResource("7_qt41j")
 going_up = NodePath("Going_Up")
 max_reach = NodePath("Max_Reach")
-vertical_speed = -40
 vertical_accel = 10
 player_body = NodePath("../..")
 
@@ -418,9 +469,10 @@ player_body = NodePath("../..")
 script = ExtResource("8_f0qh4")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Flying_State/Going_Up"]
-position = Vector2(1, 0)
-texture = ExtResource("3_3amtp")
-hframes = 4
+visible = false
+position = Vector2(1, -8)
+texture = ExtResource("9_wm0tk")
+hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Flying_State/Going_Up"]
 libraries = {
@@ -431,9 +483,10 @@ libraries = {
 script = ExtResource("10_cxntq")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Flying_State/Max_Reach"]
-position = Vector2(1, 0)
-texture = ExtResource("3_3amtp")
-hframes = 4
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("11_upu4v")
+hframes = 6
 frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Flying_State/Max_Reach"]
@@ -446,7 +499,8 @@ script = ExtResource("11_rs4fh")
 player_body = NodePath("../..")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/State_Machine/Climbing_State"]
-texture = ExtResource("11_nmga6")
+visible = false
+texture = ExtResource("13_2cco0")
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/State_Machine/Climbing_State"]
@@ -461,5 +515,60 @@ shape = SubResource("CapsuleShape2D_aelwd")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(1, -76)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Bag_icon" type="TextureRect" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 70.0
+offset_bottom = 67.0
+texture = ExtResource("14_7nv3h")
+
+[node name="Inventory_bg" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 502.0
+offset_bottom = 291.0
+color = Color(0.2, 0.113725, 0.286275, 0.517647)
+
+[node name="Inventory" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -110.0
+offset_right = 110.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_qktdv")
+
+[node name="Seed_number" type="Label" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 119.0
+offset_right = 89.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(0.878431, 0.933333, 0.886275, 1)
+theme_override_fonts/font = ExtResource("16_qk2jw")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+
+[node name="Flower_number" type="Label" parent="CanvasLayer/Inventory"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 119.0
+offset_right = 161.0
+offset_bottom = 142.0
+theme_override_colors/font_color = Color(0.878431, 0.933333, 0.886275, 1)
+theme_override_fonts/font = ExtResource("16_qk2jw")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
 
 [connection signal="animation_finished" from="CharacterBody2D/State_Machine/Flying_State/Going_Up/AnimationPlayer" to="CharacterBody2D/State_Machine/Flying_State" method="_on_animation_player_animation_finished"]

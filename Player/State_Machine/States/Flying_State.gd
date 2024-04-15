@@ -2,9 +2,9 @@ extends State
 
 @export var going_up :State
 @export var max_reach :State
-@export var vertical_speed = -400
+@export var vertical_speed = -200
 @export var vertical_accel = 100
-@export var flying_time:float = 2
+@export var flying_time:float = 1
 
 var running_state:State
 var substates_array : Array [State] = []
@@ -41,9 +41,16 @@ func push_up():
 		player_body.move_and_slide()
 	if elapsed_time() > flying_time:
 		player_body.velocity.x = Input.get_axis("ui_left","ui_right")*30
-		player_body.velocity.y = move_toward(player_body.velocity.y,0,vertical_accel)
+		var tween = create_tween()
+		tween.tween_property(player_body,"velocity",Vector2.ZERO,0.25)
 		player_body.move_and_slide()
-		if player_body.velocity.y == 0:
+		var vector:Vector2
+		vector.x = 0
+		vector.y = -0
+		#weirdly, when velocity is subjected to a tweening, it never reaches zero
+		#probably something about floating point representation
+		if abs(player_body.velocity.y) < 0.5:
+			player_body.velocity.y = 0
 			complete()
 			exit()
 	
@@ -72,3 +79,7 @@ func _on_animation_player_animation_finished(anim_name):
 func exit():
 	super()
 	running_state = going_up
+
+func complete():
+	super()
+	GlobalVariables.flower_number -= 1

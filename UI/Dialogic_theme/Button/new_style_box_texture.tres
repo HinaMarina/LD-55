@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dftljqtfs3ag7"]
+
+[ext_resource type="Texture2D" uid="uid://sbk3arn28fad" path="res://UI/Dialogic_theme/Button/normal.png" id="1_0c0hk"]
+
+[resource]
+texture = ExtResource("1_0c0hk")
+texture_margin_left = 2.0
+texture_margin_top = 4.0
+texture_margin_right = 2.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(3, 3, 38, 12)

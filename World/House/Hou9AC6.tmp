@@ -1,0 +1,273 @@
+[gd_scene load_steps=39 format=3 uid="uid://divdlco2alfhm"]
+
+[ext_resource type="Texture2D" uid="uid://b4f0fx8vf25cy" path="res://World/House/House_Layers/Bg.png" id="1_gw5pc"]
+[ext_resource type="Script" path="res://World/House/House.gd" id="1_gxsh4"]
+[ext_resource type="Texture2D" uid="uid://do4oqxxld8vga" path="res://World/House/House_Layers/Bed.png" id="2_hwg5d"]
+[ext_resource type="Texture2D" uid="uid://cxyj72lfbm2r2" path="res://World/House/Caldeirão-Sheet.png" id="4_pxpka"]
+[ext_resource type="Texture2D" uid="uid://bswp5xtk2nnli" path="res://World/House/House_Layers/pointer-changes-sheet.png" id="5_7o3o4"]
+[ext_resource type="PackedScene" uid="uid://btsi2e0p4y0ne" path="res://Player/player.tscn" id="5_pbjjl"]
+[ext_resource type="Texture2D" uid="uid://b54ifiw7ej3ls" path="res://World/House/Door_Sheet.png" id="5_yolsv"]
+[ext_resource type="Texture2D" uid="uid://dl278pxbcvhke" path="res://World/House/Arrow_anim.png" id="6_xw7w4"]
+[ext_resource type="Texture2D" uid="uid://mos27dvgb26r" path="res://World/House/House_Layers/externalarea.png" id="8_ffy2i"]
+[ext_resource type="Texture2D" uid="uid://csw1lr05phkp8" path="res://World/House/zone_tip.png" id="10_ks2bi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhjwv"]
+size = Vector2(64, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5h5p"]
+size = Vector2(39, 105)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adx7u"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(0, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nsey"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(100, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxnc5"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(200, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0cff"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(300, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsph8"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(400, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wjd7"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(500, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih8oo"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(600, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhnpt"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(700, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phsuv"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(800, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_488ik"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(900, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pmy5"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1000, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_af5ed"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1100, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2q2e"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1200, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6cfm"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1300, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te5ls"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1400, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7um7"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1500, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avfou"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1600, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbvji"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1700, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q60h"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1800, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnl35"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(1900, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xmmu"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(2000, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syj5b"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(2100, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts0ca"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(2200, 0, 100, 201)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whd8o"]
+atlas = ExtResource("4_pxpka")
+region = Rect2(2300, 0, 100, 201)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s3has"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adx7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nsey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxnc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0cff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsph8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wjd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ih8oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhnpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phsuv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_488ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pmy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_af5ed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2q2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6cfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te5ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7um7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avfou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbvji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8q60h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnl35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xmmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_syj5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts0ca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whd8o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wxyr"]
+size = Vector2(313, 20)
+
+[node name="Bedroom" type="Node2D" node_paths=PackedStringArray("Player")]
+script = ExtResource("1_gxsh4")
+Player = NodePath("Player")
+
+[node name="Bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_gw5pc")
+
+[node name="Bed" type="Sprite2D" parent="."]
+position = Vector2(-112, 81)
+texture = ExtResource("2_hwg5d")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bed"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/StaticBody2D"]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_lhjwv")
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(95, 60)
+texture = ExtResource("5_yolsv")
+hframes = 8
+
+[node name="Pointer" type="Sprite2D" parent="Door"]
+position = Vector2(27, -25)
+texture = ExtResource("5_7o3o4")
+hframes = 3
+
+[node name="Area2D" type="Area2D" parent="Door"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Area2D"]
+position = Vector2(-0.5, -1.5)
+shape = SubResource("RectangleShape2D_s5h5p")
+
+[node name="ArrowAnim" type="Sprite2D" parent="Door"]
+position = Vector2(27, -25)
+texture = ExtResource("6_xw7w4")
+hframes = 6
+
+[node name="Player" parent="." instance=ExtResource("5_pbjjl")]
+position = Vector2(-24, 34)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(47, 23)
+sprite_frames = SubResource("SpriteFrames_s3has")
+autoplay = "default"
+frame_progress = 0.894028
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-6.5, 108)
+shape = SubResource("RectangleShape2D_4wxyr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+build_mode = 1
+polygon = PackedVector2Array(-161, 116, -161, -7, -7, -79, 147, -6, 149, 116, 95.9728, 116)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Externalarea" type="Sprite2D" parent="."]
+texture = ExtResource("8_ffy2i")
+
+[node name="ZoneTip" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-9, 37)
+texture = ExtResource("10_ks2bi")
+
+[node name="ZoneTip2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-9, 37)
+texture = ExtResource("10_ks2bi")
+
+[connection signal="body_entered" from="Door/Area2D" to="." method="_on_area_2d_body_entered"]

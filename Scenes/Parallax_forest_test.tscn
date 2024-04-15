@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://di6valc4ki7v2"]
+[gd_scene load_steps=13 format=3 uid="uid://di6valc4ki7v2"]
 
+[ext_resource type="Script" path="res://Scenes/teste.gd" id="1_k25vp"]
 [ext_resource type="Texture2D" uid="uid://xhtwosbd1mi4" path="res://World/parallax_forest_test/7.png" id="2_suqkg"]
 [ext_resource type="Texture2D" uid="uid://qjygnki02bdw" path="res://World/parallax_forest_test/6.png" id="3_jfekb"]
 [ext_resource type="Texture2D" uid="uid://yvb37uis5kuf" path="res://World/parallax_forest_test/5.png" id="4_qdbwy"]
@@ -8,11 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://drtdml0hadeqv" path="res://World/parallax_forest_test/2.png" id="7_jnw1g"]
 [ext_resource type="PackedScene" uid="uid://btsi2e0p4y0ne" path="res://Player/player.tscn" id="8_cb50b"]
 [ext_resource type="Texture2D" uid="uid://cbm1ex0u7vc8r" path="res://World/parallax_forest_test/1.png" id="9_xtj4l"]
+[ext_resource type="PackedScene" uid="uid://dcjdbimpdbs51" path="res://World/Items/flower_item.tscn" id="10_en7ny"]
+[ext_resource type="PackedScene" uid="uid://c3x57drfrauhp" path="res://World/Items/Seed_Item.tscn" id="11_musxu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_617ox"]
 size = Vector2(2067, 26)
 
 [node name="Node2D" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_k25vp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -59,19 +64,39 @@ motion_mirroring = Vector2(1060, 0)
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer7"]
 texture = ExtResource("3_jfekb")
 
-[node name="Player" parent="CanvasLayer/ParallaxBackground" instance=ExtResource("8_cb50b")]
-position = Vector2(239, 227)
-
-[node name="ParallaxLayer8" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
-motion_scale = Vector2(1.2, 1)
-motion_mirroring = Vector2(1060, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer8"]
-texture = ExtResource("2_suqkg")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(342.5, 229)
+position = Vector2(342.5, 220)
 shape = SubResource("RectangleShape2D_617ox")
+
+[node name="Flower_Item" parent="StaticBody2D" instance=ExtResource("10_en7ny")]
+position = Vector2(474, 196)
+
+[node name="Player" parent="StaticBody2D" instance=ExtResource("8_cb50b")]
+position = Vector2(239, 218)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer2"]
+layer = 100
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="CanvasLayer2/ParallaxBackground"]
+top_level = true
+z_index = 100
+motion_scale = Vector2(1.2, 1)
+motion_mirroring = Vector2(1060, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/ParallaxBackground/ParallaxLayer8"]
+texture = ExtResource("2_suqkg")
+
+[node name="Flower_Item" parent="." instance=ExtResource("11_musxu")]
+position = Vector2(425, 199)
+
+[node name="Flower_Item2" parent="." instance=ExtResource("11_musxu")]
+position = Vector2(385, 219)
+
+[node name="Flower_Item3" parent="." instance=ExtResource("11_musxu")]
+position = Vector2(346, 201)

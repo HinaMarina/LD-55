@@ -22,3 +22,9 @@ func do():
 
 func set_tree_blend_position():
 		animator_tree.set("parameters/blend_position",input_vector.x)
+
+func step_sound_play():
+	audio_player.pitch_scale = 1.0 + randf_range(-0.1, 0.1)
+	audio_player.play()
+	pass
+	
