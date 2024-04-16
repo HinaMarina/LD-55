@@ -4,15 +4,29 @@ extends Node2D
 @onready var arrow = $Door/ArrowAnim
 @onready var pointer = $Door/Pointer
 @onready var zone_tip = $ZoneTip
+@export var bgm_players : Array[AudioStreamPlayer2D]
+@export var ingredients_label_number : TextureRect
+@export var ingredientes_number : Label
+
 var zone_tip_calls_counter : int =0
 var entrou:bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GlobalVariables.modulate_object(ingredients_label_number,false,3)
+	PauseTree.can_move = false
+	for audio in bgm_players:
+		audio.playing = true
+	GlobalVariables.can_fly = false
 	Player.camera.enabled = false
 	zone_tip.modulate.a = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_action_just_pressed("ui_accept"):
+			GlobalVariables.modulate_object(ingredients_label_number,true,0.2)
+			PauseTree.can_move = true
+	ingredientes_number.text = str(3 - GlobalVariables.number_levels_passed)
+	ingredientes_number.modulate.a = ingredients_label_number.modulate.a
 	if entrou:
 		if Input.is_action_just_pressed("ui_up"):
 			if arrow.frame+2 < 6:

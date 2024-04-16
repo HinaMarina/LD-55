@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://divdlco2alfhm"]
+[gd_scene load_steps=44 format=3 uid="uid://divdlco2alfhm"]
 
 [ext_resource type="Texture2D" uid="uid://b4f0fx8vf25cy" path="res://World/House/House_Layers/Bg.png" id="1_gw5pc"]
 [ext_resource type="Script" path="res://World/House/House.gd" id="1_gxsh4"]
@@ -11,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://mos27dvgb26r" path="res://World/House/House_Layers/externalarea.png" id="8_ffy2i"]
 [ext_resource type="Texture2D" uid="uid://csw1lr05phkp8" path="res://World/House/zone_tip.png" id="10_ks2bi"]
 [ext_resource type="Script" path="res://World/House/House_ZoneTip.gd" id="11_yldmq"]
+[ext_resource type="AudioStream" uid="uid://dn25kcg3u0kmi" path="res://Sound/BGM/Into_the_magical_cabin.mp3" id="12_1x8by"]
+[ext_resource type="Texture2D" uid="uid://befn7kxo1avdf" path="res://UI/Icons/Ingredients_number_label.png" id="13_21ili"]
+[ext_resource type="FontFile" uid="uid://dieecbu2t0pxc" path="res://UI/Typefaces/cambria.ttc" id="14_3ugh3"]
+[ext_resource type="AudioStream" uid="uid://bxjeeqgytrrcg" path="res://Sound/FX/ruido_rosa.ogg" id="15_vgy7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhjwv"]
 size = Vector2(64, 31)
@@ -197,9 +201,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wxyr"]
 size = Vector2(313, 20)
 
-[node name="Bedroom" type="Node2D" node_paths=PackedStringArray("Player")]
+[node name="Bedroom" type="Node2D" node_paths=PackedStringArray("Player", "bgm_players", "ingredients_label_number", "ingredientes_number")]
 script = ExtResource("1_gxsh4")
 Player = NodePath("Player")
+bgm_players = [NodePath("AudioStreamPlayer2D"), NodePath("AudioStreamPlayer2D2")]
+ingredients_label_number = NodePath("CanvasLayer/Ingredients_number_label")
+ingredientes_number = NodePath("CanvasLayer/Ingredients_number_label/Ingredients_number")
 
 [node name="Bg" type="Sprite2D" parent="."]
 texture = ExtResource("1_gw5pc")
@@ -262,9 +269,43 @@ polygon = PackedVector2Array(-161, 116, -161, -7, -7, -79, 147, -6, 149, 116, 95
 texture = ExtResource("8_ffy2i")
 
 [node name="ZoneTip" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-7, 34)
 texture = ExtResource("10_ks2bi")
 script = ExtResource("11_yldmq")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_1x8by")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_vgy7w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Ingredients_number_label" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.5
+offset_top = -27.0
+offset_right = 82.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_21ili")
+
+[node name="Ingredients_number" type="Label" parent="CanvasLayer/Ingredients_number_label"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 21.0
+offset_right = 106.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("14_3ugh3")
+theme_override_font_sizes/font_size = 12
+text = "0"
 
 [connection signal="body_entered" from="Door/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Door/Area2D" to="." method="_on_area_2d_body_exited"]

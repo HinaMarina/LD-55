@@ -63,19 +63,19 @@ func _process(delta):
 					update_states_animator_tree()
 					update_sprites_visibility()
 
-				elif !flying:
+				elif !identify_directional_input() && !flying:
 					player_body.velocity = player_body.velocity.move_toward(Vector2.ZERO,120)
 					player_body.move_and_slide()
 					if player_body.velocity == Vector2.ZERO:
 						set_state(idle_state)
 						update_sprites_visibility()
 						update_states_variables()
-						if Input.is_action_just_pressed("ui_accept") && GlobalVariables.flower_number>=1:
+						if Input.is_action_just_pressed("Fly") && GlobalVariables.flower_number>=1 && GlobalVariables.can_fly:
 							set_state(flying_state)
 							flying = true
 							update_sprites_visibility()
 		
-			if Input.is_action_just_pressed("climb"):
+			if Input.is_action_just_pressed("climb") && GlobalVariables.can_climb:
 				set_state(climbing_state)
 				update_sprites_visibility()
 		
